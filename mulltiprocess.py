@@ -24,19 +24,22 @@ import multiprocessing
 import multiprocessing.shared_memory
 
 
-def calc_square(numbers, result):
+def calc_square(numbers, result, v):
+    v.value = 5.67
     for idx, n in enumerate(numbers):
         result[idx] = n*n
 
 if __name__ == '__main__':
     numbers=[2,3,8,9]
     # to share data between processes
-    result = multiprocessing.Array('i',4) # 'i' means integer, 'd' means double
+    result = multiprocessing.Array('i', 4) # 'i' means integer
+    v = multiprocessing.Value('d', 0.0) # 'd' means double
 
-    p1 = multiprocessing.Process(target=calc_square, args=(numbers, result))
+    p1 = multiprocessing.Process(target=calc_square, args=(numbers, result, v))
 
     p1.start()
     p1.join()
 
     print('result: ', result[:])
+    print('value = ', v.value)
     print('Done!')
