@@ -1,0 +1,13 @@
+# open the terminal and run the following command
+
+python -m pytest
+
+or
+
+pytest -v
+    you can also use py.test instead of pytest
+    -v is verbose (optional) for the detailed information about the tests
+
+
+NOTE:
+Please use `test` prefix for all test files and also all test methods
